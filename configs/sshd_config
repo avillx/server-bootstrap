@@ -1,0 +1,30 @@
+Port $1
+
+# Logging
+LogLevel INFO
+
+# Authentication:
+
+LoginGraceTime 2m
+PermitRootLogin no
+#StrictModes yes
+MaxAuthTries 6
+MaxSessions 1
+
+PubkeyAuthentication yes
+PasswordAuthentication yes
+#PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+#UsePAM no
+
+AllowAgentForwarding no
+AllowTcpForwarding no
+#GatewayPorts no 
+PermitTTY yes 
+PrintMotd yes
+#PrintLastLog yes
+MaxStartups 10:30:100
+#PermitTunnel no 
+#ChrootDirectory none 
+Banner /etc/issue.net
+AcceptEnv LANG LC_*
