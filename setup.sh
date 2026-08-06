@@ -16,7 +16,6 @@ main(){
     # ensure root
     if [ "$(id -u)" -ne 0 ]; then 
         echo "This script must be run as root" 2>&1
-        exec su -c "$0 $*" root
         exit 1
     fi
 
