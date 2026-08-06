@@ -23,6 +23,7 @@ main(){
     repo=$1
     if [ -z "$repo" ];then
         echo "first argument, want: <owner/repo> has: none"
+        exit 1
     fi
   
     # get work directory and ensure it exists
@@ -45,12 +46,12 @@ main(){
     set -- "$@" "70-envirement"
 
     for script in "$@"; do
-        if ! . "${WORKDIR}/${script}.sh"; then
-            err "failed on ${script} script"
+        if ! . "${WORKDIR}/${script}.sh" < /dev/tty > /dev/tty 2>&1; then
+            echo "failed on ${script} script"
             exit 1
         fi             
     done
-
+    
     printf "//// bootstrap done\n"
 }
 main "$@"

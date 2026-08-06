@@ -4,7 +4,7 @@ Scripts for fast server setup
 
 Run with one command:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/avillx/server-bootstrap/main/99-setup.sh | bash -s -- avillx/server-bootstrap
+curl -fsSL https://raw.githubusercontent.com/avillx/server-bootstrap/main/99-setup.sh | sh -s -- avillx/server-bootstrap
 ```
 
 **Scripts:**
