@@ -37,6 +37,7 @@ main(){
         exit 1
     fi
 
+    LIB="${WORKDIR}/00-lib.sh"
     set -- "10-packages"
     set -- "$@" "20-user-managment"
     set -- "$@" "30-ssh"

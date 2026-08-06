@@ -1,6 +1,7 @@
 #!/bin/sh
 
-. "$(dirname "$0")/00-lib.sh"
+: "${LIB:=$(dirname "$0")/00-lib.sh}"
+. "$LIB"
 
 #################################################
 # Produce config for SSH
