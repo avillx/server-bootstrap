@@ -4,7 +4,7 @@
 
 
 #################################################
-# Return list of users available for docker usage
+# Return list of users available for Docker usage
 # Arguments:
 #   none
 # Outputs:
@@ -20,7 +20,7 @@ list_of_users() {
 }
 
 #################################################
-# Attach docker packages repository for apt
+# Attach Docker packages repository to apt
 # Arguments:
 #   none
 # Outputs:
@@ -36,7 +36,7 @@ attach_docker_repo() {
         exit 1
     fi
 
-    if ! apt install -y ca-certificates curl; then
+    if ! apt install -y ca-certificates; then
         return 1
     fi
 
@@ -66,7 +66,7 @@ attach_docker_repo() {
 }
 
 #################################################
-# Entrypoint install docker and set user in docker
+# Entrypoint. Install Docker and add user to Docker
 # group
 # Arguments:
 #   none

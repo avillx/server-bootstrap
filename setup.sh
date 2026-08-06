@@ -22,7 +22,7 @@ main(){
 
     set -euo pipefail
   
-    # get work directory and ensure it existence
+    # get work directory and ensure it exists
     WORKDIR="$(mktemp -d)"
     
     if [[ "$WORKDIR" == /tmp/* ]] ; then 

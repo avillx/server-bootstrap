@@ -56,7 +56,7 @@ EOF
 }
 
 #################################################
-# Entrypoint to config environment
+# Entrypoint. Configure environment
 # Arguments:
 #   none
 # Outputs:

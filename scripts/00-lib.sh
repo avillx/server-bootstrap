@@ -93,8 +93,8 @@ success() {
 }
 
 #################################################
-# Ensure shell runned under root
-# exit with code 1 when script runned not under root 
+# Ensure shell is run under root
+# exit with code 1 when script is not run under root 
 # Globals:
 #   SECOND
 #   NC

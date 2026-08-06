@@ -3,7 +3,7 @@
 . "$(dirname "$0")/00-lib.sh"
 
 #################################################
-# Produce config for ssh
+# Produce config for SSH
 # Arguments:
 #   port
 # Outputs:
@@ -70,7 +70,7 @@ validate_port() {
     esac
 
     if [ "$port" -lt 1 ] || [ "$port" -gt 65535 ]; then
-        err "port must be greather than 1 and lesser than 65535"
+        err "port must be greater than 1 and less than 65535"
         return 1
     fi
 
@@ -83,12 +83,12 @@ validate_port() {
 }
 
 #################################################
-# ensure at least one user has ssh keys
+# ensure at least one user has SSH keys
 # Arguments:
 #   none
 # Outputs:
 #   0 - when one or more users has ssh keys
-#   1 - when no one user borrow keys 
+#   1 - when no user has SSH keys 
 #################################################
 ensure_keys() {
     while IFS=: read -r username _ uid _ _ home _; do
@@ -98,7 +98,7 @@ ensure_keys() {
             continue
         fi
 
-        # ckeck ssh dir
+        # check SSH dir
         if [ ! -d "$home/.ssh" ]; then
             continue
         fi 
@@ -114,7 +114,7 @@ ensure_keys() {
 }
 
 #################################################
-# Entrypoint. Setup ssh and setting it
+# Entrypoint. Setup SSH
 # Arguments:
 #   none
 # Outputs:
@@ -130,13 +130,13 @@ main(){
 
     # Install ssh
     if ! apt install -y ssh ; then
-        err "erron on ssh install"
+        err "error on SSH install"
         exit 1
     fi
 
 
     info "ensure access"
-    # Ensure keys existence 
+    # Ensure SSH keys exist 
     while true; do
         if ensure_keys; then
             break

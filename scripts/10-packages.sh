@@ -3,7 +3,7 @@
 . "$(dirname "$0")/00-lib.sh"
 
 #################################################
-# Updates actual packages with "apt"
+# Update packages with "apt"
 # Globals:
 #   none
 # Arguments:

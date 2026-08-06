@@ -3,7 +3,7 @@
 . "$(dirname "$0")/00-lib.sh"
 
 #################################################
-# Validate user name for: case, empty and already existence
+# Validate user name: case, empty, and already existing
 # Arguments:
 #   user name
 # Outputs:
@@ -34,7 +34,7 @@ validate_user() {
 }
 
 #################################################
-# Entrypoint. set root password, create new user with password
+# Entrypoint. Set root password, create new user with password
 # Arguments:
 #   none
 # Outputs:

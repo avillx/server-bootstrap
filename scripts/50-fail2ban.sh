@@ -26,7 +26,7 @@ EOF
 }
 
 #################################################
-# Entrypoint install and setting up fail2ban
+# Entrypoint. Install and set up fail2ban
 # Arguments:
 #   none
 # Outputs:

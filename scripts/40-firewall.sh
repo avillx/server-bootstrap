@@ -44,7 +44,7 @@ EOF
 }
 
 #################################################
-# Entrypoint install and setting up iptables with
+# Entrypoint. Install and set up iptables with
 # persistent config
 # Arguments:
 #   none
@@ -91,7 +91,7 @@ iptables-persistent/autosave_v6 boolean false" | debconf-set-selections
     ipv4_iptables_config "$ssh_port" > "$RULES_V4"
     ipv6_iptables_config > "$RULES_V6"
 
-    # validation (iptables-restore --test) is unneccecary for this simple config
+    # validation (iptables-restore --test) is unnecessary for this simple config
     
     # apply
     if ! iptables-restore < "$RULES_V4"; then
