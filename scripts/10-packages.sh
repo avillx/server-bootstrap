@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. "$(dirname "$0")/00-lib.sh"
+
 #################################################
 # Updates actual packages with "apt"
 # Globals:
@@ -12,14 +14,16 @@
 main(){
     cleanup "packages"
 
-    msg "update"
-    if ! apt-get update ; then
+    root_only
+
+    info "update"
+    if ! apt update ; then
         err "packages update"
         exit 1
     fi
 
-    msg "upgrade"
-    if ! apt-get upgrade; then
+    info "upgrade"
+    if ! apt upgrade; then
         err "packages upgrade"
         exit 1
     fi
