@@ -87,11 +87,9 @@ iptables-persistent/autosave_v6 boolean false" | debconf-set-selections
     fi
 
     RULES_V4=/etc/iptables/rules.v4
-    RULES_V6=/etc/iptables/rules.v6
-
+    
     # write persistent rule files
     mkdir -p /etc/iptables
-
 
     # optinally expose 445 and 80 
     additional_rules=""
@@ -103,19 +101,22 @@ iptables-persistent/autosave_v6 boolean false" | debconf-set-selections
     fi
 
     ipv4_iptables_config "$ssh_port" "$additional_rules" > "$RULES_V4"
-    ipv6_iptables_config > "$RULES_V6"
-
-    # validation (iptables-restore --test) is unnecessary for this simple config
     
-    # apply
+    # validation (iptables-restore --test) is unnecessary for this simple config
+
     if ! iptables-restore < "$RULES_V4"; then
         err "ipv4 config restore has errors"
         exit 1
     fi
 
-    if ! ip6tables-restore < "$RULES_V6"; then
-        err "ipv6 config restore has errors"
-        exit 1
+    # ipv6 rules
+    if user_option "set up rules for ipv6?"; then
+        RULES_V6=/etc/iptables/rules.v6
+        ipv6_iptables_config > "$RULES_V6"
+        if ! ip6tables-restore < "$RULES_V6"; then
+            err "ipv6 config restore has errors"
+            exit 1
+        fi
     fi
 
     # enable daemon
