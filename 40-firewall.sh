@@ -6,7 +6,8 @@
 #################################################
 # Produce config for iptables ipv4
 # Arguments:
-#   ssh port
+#   $1 ssh port
+#   $2 optional rules
 # Outputs:
 #   text of iptables config
 #################################################
@@ -21,6 +22,7 @@ ipv4_iptables_config() {
 -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 -A INPUT -p tcp --dport ${ssh_port} -j ACCEPT
 -A INPUT -p icmp -j ACCEPT
+$2
 COMMIT
 EOF
 }
@@ -89,7 +91,18 @@ iptables-persistent/autosave_v6 boolean false" | debconf-set-selections
 
     # write persistent rule files
     mkdir -p /etc/iptables
-    ipv4_iptables_config "$ssh_port" > "$RULES_V4"
+
+
+    # optinally expose 445 and 80 
+    additional_rules=""
+    if user_option "Expose 443 and 80?" ;then
+        expose_ports_443_80=$(printf " \
+-A INPUT -p tcp --dport 443 -j ACCEPT\n \
+-A INPUT -p tcp --dport 80 -j ACCEPT")
+        additional_rules="$expose_ports_443_80"
+    fi
+
+    ipv4_iptables_config "$ssh_port" "$additional_rules" > "$RULES_V4"
     ipv6_iptables_config > "$RULES_V6"
 
     # validation (iptables-restore --test) is unnecessary for this simple config

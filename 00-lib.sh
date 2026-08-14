@@ -142,6 +142,39 @@ user_confirm() {
     done
 }
 
+
+#################################################
+# Ask user y/n dialogue
+# Arguments:
+#   $1 message for user
+# Outputs:
+#   1 on decline
+#   0 on confim
+#################################################
+user_option() {
+    
+    message="$(printf "%s [y/n]: " "$1")"
+
+    while true; do
+        msg "$message"
+
+        read -r key
+
+        case "$key" in
+            "y"|"Y")
+                return 0
+            ;;
+            "n"|"N")
+                return 1
+            ;;
+            *)
+                continue
+            ;;
+        esac
+
+    done
+}
+
 #################################################
 # extract port from sshd_config 
 # Arguments:
