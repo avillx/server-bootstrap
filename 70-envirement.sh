@@ -102,6 +102,8 @@ main() {
                     
     done < /etc/passwd
 
+    chsh -s /bin/bash
+
     # motd
     msg "type message of the day: "
     read -r motd
