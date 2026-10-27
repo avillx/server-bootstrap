@@ -1,23 +1,7 @@
-#!/bin/sh
+#! /bin/sh
 
 : "${LIB:=$(dirname "$0")/00-lib.sh}"
 . "$LIB"
-
-#################################################
-# return config for /root/.profile file
-# Arguments:
-#   none
-# Outputs:
-#   profile config
-#################################################
-root_profile() {
-    cat << EOF
-export SECONDARY='\e[2;37m'
-export RED='\e[0;31m'
-export RESET='\e[0m'
-export PS1="\${RED}[ROOT]\${SECONDARY} \w # \${RESET}"
-EOF
-}
 
 #################################################
 # return config for ~/.profile file
@@ -88,24 +72,22 @@ main() {
     # profiles
     info "set profiles"
 
-    root_profile > "/root/.profile"
-
-    while IFS=: read -r _ _ uid _ _ home _; do
+    while IFS=: read -r user _ uid _ _ home _; do
         
         if [ "$uid" -lt 1000 ]; then
             continue
         fi
 
+         # set /bin/bash for all user as default
+        [ "$uid" -ge 1000 ] && usermod -s /bin/bash "$user"
+
         [ -d "$home" ] || continue
 
+        # set profile
         user_profile > "$home/.profile"
                     
     done < /etc/passwd
 
-    # set /bin/bash for all user as default
-    while IFS=: read -r user _ uid _ _ _ _; do
-        [ "$uid" -ge 1000 ] && usermod -s /bin/bash "$user"
-    done < /etc/passwd
 
     # motd
     msg "type message of the day: "
