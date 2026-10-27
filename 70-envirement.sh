@@ -102,7 +102,10 @@ main() {
                     
     done < /etc/passwd
 
-    chsh -s /bin/bash
+    # set /bin/bash for all user as default
+    while IFS=: read -r user _ uid _ _ _ _; do
+        [ "$uid" -ge 1000 ] && usermod -s /bin/bash "$user"
+    done < /etc/passwd
 
     # motd
     msg "type message of the day: "
