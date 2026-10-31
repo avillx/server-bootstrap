@@ -1,5 +1,7 @@
 # SERVER.bootstrap
 
+> Since I learned about ansible this repo is useless shit
+
 Scripts for fast server setup
 
 Run with one command:
